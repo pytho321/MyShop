@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>MyShop | ContactUs</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <h3 class="background text-light p-3 text-center">Contact Us</h3>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card mb-3 background" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <div style="max-width:100%;overflow:hidden;color:red;width:500px;height:500px;">
+                        <div id="embedded-map-display" style="height:100%; width:100%;max-width:100%;">
+                            <iframe style="height:100%;width:100%;border:0;" frameborder="0"
+                                src="https://www.google.com/maps/embed/v1/place?q=Sector+15,+Gurugram,+Haryana,+India&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+                            </iframe>
+                        </div>
+                        <a class="google-map-code-enabler" rel="nofollow" href="https://www.bootstrapskins.com/themes"
+                            id="enable-map-data">premium bootstrap themes</a>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Contact us here</h5>
+                      <p class="card-text">Mobile: 8171063389</p>
+                      <p class="card-text">Email: vnaincy97@gmail.com</p>
+                      <p class="card-text"><small class="text-body-secondary">Address: Sector-15, part- 2, Gurugram, Haryana, India</small></p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h5 class="background text-light mt-2 mb-2 p-3 text-center">Please fill this form to send us the feedback!</h5>
+            {% for i in messages %}
+            <div class="alert alert-success" role="alert">
+                {{i}}
+            </div>
+            {% endfor %}
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter Name ">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter Email Id ">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number ">
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" name="subject" placeholder="Enter The Subject">
+                </div>
+                <div class="mb-3">
+                    <label for="messages" class="form-label">Messages</label>
+                    <textarea class="form-control" name="messages" placeholder="Enter your message"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="actype" class="form-label">Account Type</label>
+                    <select name="actype" class="form-control">
+                        <option value="seller">Seller</option>
+                        <option value="buyer">Buyer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn background text-light w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

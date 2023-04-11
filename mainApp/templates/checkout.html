@@ -1,0 +1,120 @@
+{% extends 'index.html' %}
+{% load cart %}
+{% load static %}
+{% block title %}
+<title>MyShop | Cart Section</title>
+{% endblock %}
+
+{% block body %}
+    <h3 class="background text-light p-3 text-center">CheckOut Section</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 col-12">
+                <h5 class="background text-light p-2 text-center">Address Details</h5>
+                <form action="/updateprofile/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter Name " value={{User.name}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email Id "
+                            value={{User.email}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number "
+                            value={{User.phone}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address-line1</label>
+                        <input type="text" class="form-control" name="addressline1" placeholder="Enter Phone Number "
+                            value={{User.addressline1}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address-lin2</label>
+                        <input type="text" class="form-control" name="addressline2" placeholder="Enter Phone Number "
+                            value={{User.addressline2}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address-line3</label>
+                        <input type="text" class="form-control" name="addressline3" placeholder="Enter Phone Number "
+                            value={{User.addressline3}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pin" class="form-label">Pin</label>
+                        <input type="text" class="form-control" name="pin" placeholder="Enter Phone Number "
+                            value={{User.pin}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" name="city" placeholder="Enter Phone Number "
+                            value={{User.city}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">State</label>
+                        <input type="text" class="form-control" name="state" placeholder="Enter Phone Number "
+                            value={{User.state}}>
+                    </div>
+                    <button type="submit" class="btn background text-light w-100">Update</button>
+                </form>
+            </div>   
+            <div class="col-sm-6 col-12">
+                <h5 class="background text-light p-3 text-center">Product Details</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped mt-3" style="font-size:20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgb(48, 14, 14);">
+                        <tr>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th></th>
+                        </tr>
+                        {% for i in Products %}
+                        <tr>
+                            <td>{{i.name}}</td>
+                            <td>{{i.size}}</td>
+                            <td>{{request|cartQuantity:i.id}}</td>
+                            <td>{{request|cartFinal:i.id}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>Total Amount </td>
+                            <td></td>
+                            <td></td>
+                            <td>{{Total}}</td>
+                        </tr>
+                        <tr>                                  
+                            <td>Shipping Charges </td>                    
+                            <td></td>                    
+                            <td></td>                                     
+                            <td>{{Shipping}}</td>                    
+                        </tr>
+                        <tr>               
+                            <td>Final Amount </td>                    
+                            <td></td>                    
+                            <td></td>                                       
+                            <td>{{Final}}</td>                    
+                        </tr>
+                        <tr>
+                            <td>
+                                <form action="#" method="post">
+                                {% csrf_token %}
+                                    <label class="form-label">Payment Mode:</label>
+                                    <select name="mode" class="form-control">
+                                        <option value="Cash on Delivery">Cash on Delivery</option>
+                                        <option value="Online Payment">Online Payment</option>
+                                    </select>
+                                    <tr>                                   
+                                        <td colspan = '4'><button type="submit" class="btn background text-light w-100">Proceed to Buy</button></td>                                      
+                                    </tr>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>        
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'index.html' %}
+{% load cart %}
+{% load static %}
+{% block title %}
+<title>MyShop | Cart Section</title>
+{% endblock %}
+
+{% block body %}
+    <h3 class="background text-light p-3 text-center">Cart Section</h3>
+        <div class="table-responsive">
+            <table class="table table-striped mt-3" style="font-size:20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgb(48, 14, 14);">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+                {% for i in Products %}
+                <tr>
+                    {% if i.pic1 %}
+                    <td><img src="{{i.pic1.url}}" height="100px" width="80px"></td>
+                    {% else %}
+                    <td><img src="{% static 'img/noimage.webp'}" height="100px" width="80px"></td>
+                    {% endif %}
+                    <td>{{i.name}}</td>
+                    <td>{{i.size}}</td>
+                    <td>{{i.color}}</td>
+                    <td>{{i.finalPrice}}</td>
+                    <td>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{i.id}}">
+                            <input type="number" width="30%" min="1" name="q" value="{{request|cartQuantity:i.id}}">
+                            <button type="submit" style="border:none" class="btn background"><span class="material-symbols-outlined" style="color:rgb(106, 9, 9)">
+                            upgrade</span></button>
+                        </form>
+                    </td>
+                    <td>{{request|cartFinal:i.id}}</td>
+                    <td><a href="/deleteCart/{{i.id}}"><span class="material-symbols-outlined" style="color:rgb(106, 9, 9)">
+                        delete_forever
+                        </span></a></td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total Amount: </td>
+                    <td></td>
+                    <td></td>
+                    <td>{{Total}}</td>
+                </tr>
+                <tr>
+                    <td></td>                    
+                    <td></td>                    
+                    <td></td>                    
+                    <td>Shipping Charges: </td>                    
+                    <td></td>                    
+                    <td></td>                    
+                    <td>{{Shipping}}</td>                    
+                </tr>
+                <tr>
+                    <td></td>                    
+                    <td></td>                    
+                    <td></td>                    
+                    <td>Final Amount: </td>                    
+                    <td></td>                    
+                    <td></td>                    
+                    <td>{{Final}}</td>                    
+                </tr>
+                <tr>
+                    <td></td>                    
+                    <td></td>                    
+                    <td colspan = '2'><a href="/shop/all/all/all/" class="btn background text-light w-100">Go to Shop Page</a></td>                                       
+                    {% if Final %}                   
+                    <td colspan = '5'><a href="/checkout/" class="btn background text-light w-100">CheckOut: </a></td>
+                    {% else %}
+                    <td colspan = '5'><a href="#" class="btn background text-light w-100">CheckOut: </a></td>     
+                    {% endif %}                                                                       
+                </tr>
+            </table>
+        </div>
+    </h3>
+</div>
+{% endblock %}

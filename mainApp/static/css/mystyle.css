@@ -1,0 +1,13 @@
+.background{
+    background-color: rgb(199, 156, 156);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.new{
+    background-color: rgb(208, 166, 166);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    padding: 5px;
+    color: rgb(62, 18, 103);
+}
+
